@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VibeMatch — K-Pop Song Matcher</title>
+
+    <meta
+        name="description"
+        content="Find the K-pop song that matches your current vibe."
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Background decoration -->
+    <div class="background">
+        <div class="blob blob-one"></div>
+        <div class="blob blob-two"></div>
+        <div class="blob blob-three"></div>
+    </div>
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <a href="#" class="logo">
+            <span class="logo-icon">♪</span>
+            Vibe<span>Match</span>
+        </a>
+
+        <div class="nav-label">
+            K-POP SONG MATCHER
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Hero -->
+        <section class="hero">
+            <div class="eyebrow">
+                ✦ YOUR MOOD, YOUR SONG
+            </div>
+
+            <h1>
+                What's your<br>
+                <span>vibe</span> today?
+            </h1>
+
+            <p class="hero-text">
+                Tell us how you're feeling and we'll find the K-pop
+                track that fits your moment perfectly.
+            </p>
+        </section>
+
+        <!-- Matcher -->
+        <section class="matcher-card">
+
+            <!-- Step 1 -->
+            <div class="question-section">
+
+                <div class="question-header">
+                    <div>
+                        <span class="step-number">01</span>
+                        <h2>Pick your vibe</h2>
+                    </div>
+
+                    <span class="question-hint">Choose one</span>
+                </div>
+
+                <div class="vibe-grid">
+
+                    <button class="vibe-btn" data-vibe="dreamy">
+                        <span class="vibe-icon">☁️</span>
+                        <span>Dreamy</span>
+                        <small>lost in the clouds</small>
+                    </button>
+
+                    <button class="vibe-btn" data-vibe="romantic">
+                        <span class="vibe-icon">💗</span>
+                        <span>Romantic</span>
+                        <small>heart on my sleeve</small>
+                    </button>
+
+                    <button class="vibe-btn" data-vibe="confident">
+                        <span class="vibe-icon">💎</span>
+                        <span>Confident</span>
+                        <small>main character energy</small>
+                    </button>
+
+                    <button class="vibe-btn" data-vibe="energetic">
+                        <span class="vibe-icon">⚡</span>
+                        <span>Energetic</span>
+                        <small>let's go!</small>
+                    </button>
+
+                    <button class="vibe-btn" data-vibe="nostalgic">
+                        <span class="vibe-icon">📼</span>
+                        <span>Nostalgic</span>
+                        <small>missing the old days</small>
+                    </button>
+
+                    <button class="vibe-btn" data-vibe="chill">
+                        <span class="vibe-icon">🌙</span>
+                        <span>Chill</span>
+                        <small>taking it slow</small>
+                    </button>
+
+                    <button class="vibe-btn" data-vibe="sad">
+                        <span class="vibe-icon">🌧️</span>
+                        <span>In my feels</span>
+                        <small>it's one of those days</small>
+                    </button>
+
+                    <button class="vibe-btn" data-vibe="chaotic">
+                        <span class="vibe-icon">🔥</span>
+                        <span>Chaotic</span>
+                        <small>no thoughts, just vibes</small>
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- Step 2 -->
+            <div class="question-section">
+
+                <div class="question-header">
+                    <div>
+                        <span class="step-number">02</span>
+                        <h2>How much energy?</h2>
+                    </div>
+
+                    <span class="question-hint">Choose one</span>
+                </div>
+
+                <div class="energy-options">
+
+                    <button class="energy-btn" data-energy="low">
+                        <span>🌙</span>
+                        <strong>Low</strong>
+                        <small>soft & slow</small>
+                    </button>
+
+                    <button class="energy-btn" data-energy="medium">
+                        <span>✨</span>
+                        <strong>Medium</strong>
+                        <small>just right</small>
+                    </button>
+
+                    <button class="energy-btn" data-energy="high">
+                        <span>⚡</span>
+                        <strong>High</strong>
+                        <small>full power</small>
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- Match button -->
+            <button class="match-btn" id="matchBtn">
+                <span>Find my K-pop match</span>
+                <span class="arrow">→</span>
+            </button>
+
+        </section>
+
+        <!-- Result -->
+        <section class="result-section" id="resultSection">
+
+            <div class="result-label">
+                ✦ YOUR K-POP MATCH
+            </div>
+
+            <div class="song-card">
+
+                <div class="album-art" id="albumArt">
+                    <div class="vinyl">
+                        <div class="vinyl-center"></div>
+                    </div>
+
+                    <span class="album-note">♪</span>
+                </div>
+
+                <div class="song-info">
+
+                    <div class="match-tag">
+                        <span>✦</span>
+                        <span id="matchPercent">98% MATCH</span>
+                    </div>
+
+                    <h2 id="songTitle">Ditto</h2>
+
+                    <p class="artist" id="artistName">
+                        NewJeans
+                    </p>
+
+                    <p class="album" id="albumName">
+                        Get Up · 2023
+                    </p>
+
+                    <div class="divider"></div>
+
+                    <p class="reason-label">
+                        WHY THIS MATCHES
+                    </p>
+
+                    <p class="reason" id="songReason">
+                        This song perfectly captures that dreamy,
+                        nostalgic feeling.
+                    </p>
+
+                    <button class="again-btn" id="againBtn">
+                        ↻ Find another match
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>
+                Made for K-pop lovers ✦ Find your sound.
+            </p>
+        </footer>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

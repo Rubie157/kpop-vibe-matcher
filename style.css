@@ -1,0 +1,929 @@
+/* =========================================
+   VIBEMATCH — K-POP SONG MATCHER
+   ========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+
+/* =========================================
+   RESET
+   ========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    background: #08070d;
+    color: #f7f4ff;
+    font-family: "DM Sans", sans-serif;
+    overflow-x: hidden;
+}
+
+
+/* =========================================
+   BACKGROUND
+   ========================================= */
+
+.background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1;
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(133, 74, 255, 0.12),
+            transparent 35%
+        ),
+        #08070d;
+}
+
+.blob {
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.12;
+}
+
+.blob-one {
+    background: #a855f7;
+    top: 5%;
+    left: -250px;
+}
+
+.blob-two {
+    background: #ec4899;
+    top: 35%;
+    right: -250px;
+}
+
+.blob-three {
+    background: #6366f1;
+    bottom: -250px;
+    left: 35%;
+}
+
+
+/* =========================================
+   NAVBAR
+   ========================================= */
+
+.navbar {
+    width: min(1180px, calc(100% - 40px));
+    margin: 0 auto;
+    height: 90px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    color: white;
+    text-decoration: none;
+
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.8px;
+}
+
+.logo span:last-child {
+    color: #c084fc;
+}
+
+.logo-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 32px;
+    height: 32px;
+
+    margin-right: 7px;
+
+    border-radius: 9px;
+
+    background: linear-gradient(
+        135deg,
+        #a855f7,
+        #ec4899
+    );
+
+    font-size: 17px;
+}
+
+.nav-label {
+    color: #686574;
+
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+
+/* =========================================
+   MAIN
+   ========================================= */
+
+main {
+    width: min(980px, calc(100% - 40px));
+    margin: 0 auto;
+}
+
+
+/* =========================================
+   HERO
+   ========================================= */
+
+.hero {
+    text-align: center;
+    padding: 80px 20px 55px;
+}
+
+.eyebrow {
+    display: inline-block;
+
+    margin-bottom: 22px;
+
+    color: #c084fc;
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+}
+
+.hero h1 {
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: clamp(52px, 8vw, 88px);
+    line-height: 0.95;
+    letter-spacing: -5px;
+
+    font-weight: 600;
+}
+
+.hero h1 span {
+    background: linear-gradient(
+        100deg,
+        #c084fc,
+        #f472b6,
+        #fb7185
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.hero-text {
+    max-width: 530px;
+
+    margin: 28px auto 0;
+
+    color: #8f8b9d;
+
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   MATCHER CARD
+   ========================================= */
+
+.matcher-card {
+    padding: 42px;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 28px;
+
+    background: rgba(18, 16, 26, 0.82);
+
+    backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================
+   QUESTIONS
+   ========================================= */
+
+.question-section {
+    margin-bottom: 40px;
+}
+
+.question-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+}
+
+.question-header > div {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.step-number {
+    color: #9b8da9;
+
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.question-header h2 {
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.question-hint {
+    color: #666272;
+
+    font-size: 11px;
+}
+
+
+/* =========================================
+   VIBE GRID
+   ========================================= */
+
+.vibe-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 10px;
+}
+
+.vibe-btn {
+    min-height: 125px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+
+    padding: 17px;
+
+    color: #ddd9e7;
+
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 16px;
+
+    background: rgba(255, 255, 255, 0.025);
+
+    font-family: inherit;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.vibe-btn:hover {
+    transform: translateY(-3px);
+
+    border-color: rgba(192, 132, 252, 0.4);
+
+    background: rgba(192, 132, 252, 0.07);
+}
+
+.vibe-btn.selected {
+    border-color: #b66aff;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(168, 85, 247, 0.17),
+            rgba(236, 72, 153, 0.07)
+        );
+
+    box-shadow:
+        0 0 25px rgba(168, 85, 247, 0.1);
+}
+
+.vibe-icon {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.vibe-btn span:not(.vibe-icon) {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.vibe-btn small {
+    margin-top: 4px;
+
+    color: #716d7c;
+
+    font-size: 10px;
+}
+
+
+/* =========================================
+   ENERGY
+   ========================================= */
+
+.energy-options {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 10px;
+}
+
+.energy-btn {
+    min-height: 90px;
+
+    display: grid;
+
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+
+    column-gap: 13px;
+    align-items: center;
+
+    padding: 17px;
+
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 15px;
+
+    background: rgba(255, 255, 255, 0.025);
+
+    color: #ddd9e7;
+
+    font-family: inherit;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.energy-btn > span {
+    grid-row: 1 / 3;
+
+    font-size: 23px;
+}
+
+.energy-btn strong {
+    font-size: 13px;
+}
+
+.energy-btn small {
+    color: #716d7c;
+    font-size: 10px;
+}
+
+.energy-btn:hover {
+    border-color: rgba(192, 132, 252, 0.4);
+}
+
+.energy-btn.selected {
+    border-color: #ec6fc1;
+
+    background: rgba(236, 72, 153, 0.08);
+
+    box-shadow:
+        0 0 25px rgba(236, 72, 153, 0.08);
+}
+
+
+/* =========================================
+   MATCH BUTTON
+   ========================================= */
+
+.match-btn {
+    width: 100%;
+
+    margin-top: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+
+    padding: 18px 25px;
+
+    border: 0;
+    border-radius: 14px;
+
+    background: linear-gradient(
+        100deg,
+        #8b5cf6,
+        #d946ef,
+        #ec4899
+    );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 12px 30px rgba(168, 85, 247, 0.2);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.match-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 18px 40px rgba(168, 85, 247, 0.3);
+}
+
+.match-btn .arrow {
+    font-size: 20px;
+}
+
+
+/* =========================================
+   RESULT
+   ========================================= */
+
+.result-section {
+    display: none;
+
+    padding: 75px 0 30px;
+
+    animation: resultIn 0.6s ease forwards;
+}
+
+.result-section.visible {
+    display: block;
+}
+
+@keyframes resultIn {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.result-label {
+    margin-bottom: 18px;
+
+    color: #a78bfa;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 2.5px;
+
+    text-align: center;
+}
+
+
+/* =========================================
+   SONG CARD
+   ========================================= */
+
+.song-card {
+    display: grid;
+
+    grid-template-columns: 350px 1fr;
+
+    gap: 48px;
+
+    padding: 30px;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 25px;
+
+    background: rgba(18, 16, 26, 0.82);
+
+    backdrop-filter: blur(20px);
+}
+
+
+/* =========================================
+   ALBUM ART
+   ========================================= */
+
+.album-art {
+    position: relative;
+
+    aspect-ratio: 1;
+
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            #f9a8d4,
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 70% 70%,
+            #8b5cf6,
+            transparent 45%
+        ),
+        linear-gradient(
+            135deg,
+            #312e81,
+            #831843
+        );
+
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.35);
+}
+
+.album-art::before {
+    content: "";
+
+    position: absolute;
+
+    width: 170%;
+    height: 170%;
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    border-radius: 50%;
+
+    transform: rotate(25deg);
+}
+
+.vinyl {
+    width: 210px;
+    height: 210px;
+
+    border-radius: 50%;
+
+    background:
+        repeating-radial-gradient(
+            circle,
+            #17151d 0,
+            #17151d 2px,
+            #222029 3px,
+            #17151d 5px
+        );
+
+    box-shadow:
+        8px 12px 30px rgba(0, 0, 0, 0.4);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transform: rotate(-18deg);
+}
+
+.vinyl-center {
+    width: 68px;
+    height: 68px;
+
+    border-radius: 50%;
+
+    background: linear-gradient(
+        135deg,
+        #f472b6,
+        #a855f7
+    );
+
+    border: 7px solid #16131c;
+}
+
+.album-note {
+    position: absolute;
+
+    right: 25px;
+    bottom: 20px;
+
+    color: white;
+
+    font-size: 32px;
+
+    transform: rotate(15deg);
+}
+
+
+/* =========================================
+   SONG INFORMATION
+   ========================================= */
+
+.song-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.match-tag {
+    width: fit-content;
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    margin-bottom: 14px;
+    padding: 6px 10px;
+
+    border-radius: 30px;
+
+    background: rgba(168, 85, 247, 0.1);
+
+    color: #c084fc;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+.song-info h2 {
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: clamp(36px, 5vw, 54px);
+
+    line-height: 1;
+
+    letter-spacing: -2px;
+}
+
+.artist {
+    margin-top: 9px;
+
+    color: #eee8f6;
+
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.album {
+    margin-top: 5px;
+
+    color: #6f6a7a;
+
+    font-size: 11px;
+}
+
+.divider {
+    width: 100%;
+
+    height: 1px;
+
+    margin: 28px 0 20px;
+
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.reason-label {
+    margin-bottom: 8px;
+
+    color: #746d81;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+}
+
+.reason {
+    max-width: 400px;
+
+    color: #bbb5c7;
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.again-btn {
+    width: fit-content;
+
+    margin-top: 25px;
+
+    padding: 11px 15px;
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 9px;
+
+    background: transparent;
+
+    color: #aaa3b5;
+
+    font-family: inherit;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.again-btn:hover {
+    color: white;
+
+    border-color: rgba(192, 132, 252, 0.5);
+
+    background: rgba(192, 132, 252, 0.07);
+}
+
+
+/* =========================================
+   FOOTER
+   ========================================= */
+
+footer {
+    padding: 70px 0 35px;
+
+    text-align: center;
+
+    color: #4e4a57;
+
+    font-size: 11px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 800px) {
+
+    .hero {
+        padding-top: 55px;
+    }
+
+    .hero h1 {
+        letter-spacing: -3px;
+    }
+
+    .matcher-card {
+        padding: 25px;
+    }
+
+    .vibe-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .song-card {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .album-art {
+        max-width: 360px;
+        width: 100%;
+        margin: auto;
+    }
+}
+
+
+@media (max-width: 520px) {
+
+    .navbar {
+        width: min(100% - 28px, 980px);
+        height: 75px;
+    }
+
+    .nav-label {
+        display: none;
+    }
+
+    main {
+        width: min(100% - 28px, 980px);
+    }
+
+    .hero {
+        padding: 45px 8px 40px;
+    }
+
+    .hero h1 {
+        font-size: 50px;
+        letter-spacing: -3px;
+    }
+
+    .hero-text {
+        font-size: 14px;
+    }
+
+    .matcher-card {
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    .question-header {
+        align-items: flex-end;
+    }
+
+    .question-hint {
+        display: none;
+    }
+
+    .vibe-grid {
+        gap: 8px;
+    }
+
+    .vibe-btn {
+        min-height: 110px;
+        padding: 13px;
+    }
+
+    .vibe-icon {
+        font-size: 21px;
+    }
+
+    .energy-options {
+        grid-template-columns: 1fr;
+    }
+
+    .energy-btn {
+        min-height: 70px;
+    }
+
+    .song-card {
+        padding: 18px;
+        border-radius: 20px;
+    }
+
+    .song-info h2 {
+        font-size: 40px;
+    }
+
+    .album-art {
+        border-radius: 14px;
+    }
+
+    .vinyl {
+        width: 160px;
+        height: 160px;
+    }
+
+    .vinyl-center {
+        width: 52px;
+        height: 52px;
+    }
+}
+
+
+/* =========================================
+   ACCESSIBILITY
+   ========================================= */
+
+button:focus-visible {
+    outline: 2px solid #c084fc;
+    outline-offset: 3px;
+}
+
+
+/* =========================================
+   REDUCED MOTION
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
